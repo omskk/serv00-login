@@ -15,31 +15,31 @@ DD_BOT_ACCESS_TOKEN = os.getenv('DD_BOT_ACCESS_TOKEN')
 
 def login(hosts_info, command):
     users = []
-    hosts = []
+    hostnames = []
     failed_hosts = []
     for host_info in hosts_info:
-        host = host_info['host']
+        hostname = host_info['hostname']
         username = host_info['username']
         password = host_info['password']
 
-        print(f"===> 正在连接服务器：{host}...")
+        print(f"===> 正在连接服务器：{hostname}...")
         try:
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-            ssh.connect(host=host, port=22, username=username, password=password)
-            print(f"    ✅ 连接成功：{host}")
+            ssh.connect(hostname=hostname, port=22, username=username, password=password)
+            print(f"    ✅ 连接成功：{hostname}")
 
             stdin, stdout, stderr = ssh.exec_command(command)
             user = stdout.read().decode().strip()
             users.append(user)
-            hosts.append(host)
+            hostnames.append(hostname)
             print(f"    🔄 执行命令 '{command}' 返回：{user}")
 
             ssh.close()
         except Exception as e:
-            print(f"    ❌ 连接 {host} 失败: {str(e)}")
-            failed_hosts.append(f"{host}|{username}")
-    return users, hosts, failed_hosts
+            print(f"    ❌ 连接 {hostname} 失败: {str(e)}")
+            failed_hosts.append(f"{hostname}|{username}")
+    return users, hostnames, failed_hosts
 
 def main():
     global content  # 声明全局变量
@@ -64,7 +64,7 @@ def main():
     # 步骤2：执行SSH命令
     print("\n步骤2/4：开始执行SSH命令...")
     command = 'whoami'
-    user_list, host_list, failed_hosts = login(hosts_info, command)
+    user_list, hostname_list, failed_hosts = login(hosts_info, command)
     user_num = len(user_list)
 
     # 步骤3：收集系统信息
@@ -77,8 +77,8 @@ def main():
     # 步骤4：生成最终报告
     print("\n步骤4/4：生成最终报告...")
     content = "SSH服务器登录信息：\n"
-    for user, host in zip(user_list, host_list):
-        content += f"用户名：{user}，服务器：{host}\n"
+    for user, hostname in zip(user_list, hostname_list):
+        content += f"用户名：{user}，服务器：{hostname}\n"
     content += f"\n本次登录用户共： {user_num} 个\n登录时间：{time_str}\n登录IP：{loginip}"
 
     if failed_hosts:
