@@ -122,6 +122,7 @@ if __name__ == "__main__":
 
     # 根据环境变量控制推送
     push_type = os.getenv('PUSH_TYPE', 'false').lower()
+    print(f"是否推送：{push_type}")
     if push_type == 'true':
         title = "Serv00-登录报告"
         dingding_bot(title, content)
