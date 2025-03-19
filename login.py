@@ -12,6 +12,8 @@ import urllib.parse
 # 钉钉机器人配置
 DD_BOT_SECRET = os.getenv('DD_BOT_SECRET')
 DD_BOT_ACCESS_TOKEN = os.getenv('DD_BOT_ACCESS_TOKEN')
+PUSH_TYPE = os.getenv('PUSH_TYPE')
+
 
 def login(hosts_info, command):
     users = []
@@ -121,8 +123,7 @@ if __name__ == "__main__":
     main()
 
     # 根据环境变量控制推送
-    push_type = os.getenv('PUSH_TYPE')
-    print(f"是否推送：{push_type}")
-    if push_type == 'true':
+    print(f"是否推送：{PUSH_TYPE}")
+    if PUSH_TYPE == 'true':
         title = "Serv00-登录报告"
         dingding_bot(title, content)
