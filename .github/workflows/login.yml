@@ -29,4 +29,5 @@ jobs:
           SSH_INFO: ${{ secrets.SSH_INFO }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           DD_BOT_ACCESS_TOKEN: ${{ secrets.DD_BOT_ACCESS_TOKEN }}
+          PUSH_TYPE: ${{ secrets.PUSH_TYPE }}
         run: python login.py

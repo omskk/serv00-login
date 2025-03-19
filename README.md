@@ -8,7 +8,7 @@
 | 参数名              | 备注               |
 | ------------------- |------------------|
 | SSH_INFO            | 需要保活的serv00服务器信息 |
-| PUSH_TYPE           | 是否推送： 0/1(否/是)   |
+| PUSH_TYPE           | 是否推送： false/true |
 | DD_BOT_SECRET       | 钉钉机器人的SECRET     |
 | DD_BOT_ACCESS_TOKEN | 钉钉机器人的TOKEN      |
 

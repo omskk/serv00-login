@@ -124,6 +124,6 @@ if __name__ == "__main__":
 
     # 根据环境变量控制推送
     print(f"是否推送：{PUSH_TYPE}")
-    if PUSH_TYPE == 1:
+    if PUSH_TYPE == 'true':
         title = "Serv00-登录报告"
         dingding_bot(title, content)
