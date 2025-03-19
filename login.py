@@ -29,13 +29,15 @@ def login(hosts_info, command):
             ssh = paramiko.SSHClient()
             ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             ssh.connect(hostname=hostname, port=22, username=username, password=password)
+            # 隐藏服务器信息所以注释掉：青龙请放开
             print(f"    ✅ 连接成功：{hostname}")
 
             stdin, stdout, stderr = ssh.exec_command(command)
             user = stdout.read().decode().strip()
             users.append(user)
             hostnames.append(hostname)
-            print(f"    🔄 执行命令 '{command}' 返回：{user}")
+            # 隐藏服务器信息所以注释掉：青龙请放开
+            # print(f"    🔄 执行命令 '{command}' 返回：{user}")
 
             ssh.close()
         except Exception as e:
@@ -80,19 +82,20 @@ def main():
     print("\n步骤4/4：生成最终报告...")
     content = "SSH服务器登录信息：\n"
     for user, hostname in zip(user_list, hostname_list):
-        content += f"用户名：{user}，服务器：{hostname}\n"
+        content += f"✅用户名：{user}，服务器：{hostname}\n"
     content += f"\n本次登录用户共： {user_num} 个\n登录时间：{time_str}\n登录IP：{loginip}"
 
     if failed_hosts:
-        content += f"\n\n失败的服务器：{', '.join(failed_hosts)}"
+        content += f"\n\n❌失败的服务器：{', '.join(failed_hosts)}"
 
-    print("========================================")
-    print("最终执行结果：")
-    print("========================================")
-    print(content)
-    print("========================================")
-    print("SSH服务器登录流程结束")
-    print("========================================")
+    # 隐藏服务器信息所以注释掉：青龙请放开
+    # print("========================================")
+    # print("最终执行结果：")
+    # print("========================================")
+    # print(content)
+    # print("========================================")
+    # print("SSH服务器登录流程结束")
+    # print("========================================")
 
 def dingding_bot(title, content):
     timestamp = str(round(time.time() * 1000))
