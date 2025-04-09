@@ -1,5 +1,10 @@
 # Serv00全自动保活
 
+# 项目停止更新
+## serv00大量封号，弃坑了
+
+
+
 ## 使用方法
 
  - 添加Secrets；“Settings” > “Secrets”
